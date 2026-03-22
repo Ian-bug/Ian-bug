@@ -31,8 +31,12 @@ jobs:
 
       - name: Authenticate GitHub CLI
         run: |
+          echo "Authentication status:"
+          gh auth status
           unset GH_TOKEN
           echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token --hostname github.com
+          echo "Authentication completed:"
+          gh auth status
 
       - name: Update README
         run: |

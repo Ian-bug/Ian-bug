@@ -13,6 +13,18 @@ def run_command(cmd: str) -> str:
 
 def fetch_github_data() -> Dict[str, Any]:
     """Fetch GitHub data using gh CLI"""
+    print("[DEBUG] Starting to fetch GitHub data...")
+
+    # Fetch user stats (simpler query)
+    user_stats_cmd = 'gh api user --jq "{login, public_repos, followers, following}"'
+    user_stats: Dict[str, Any]
+    try:
+        user_stats = json.loads(run_command(user_stats_cmd))
+        print(f"[DEBUG] User stats: {user_stats}")
+    except json.JSONDecodeError as e:
+        print(f"Warning: Failed to parse user stats data: {e}")
+        user_stats = {'login': 'Ian-bug', 'public_repos': 0, 'followers': 0, 'following': 0}
+
     # Fetch pinned repositories using GraphQL with proper formatting
     repos_cmd = r'gh api graphql --jq ".data.user.pinnedItems.nodes" -F login=Ian-bug -f query="query($login: String!) { user(login: $login) { pinnedItems(first: 6, types: REPOSITORY) { nodes { ... on Repository { name description url stargazerCount forkCount primaryLanguage { name } } } } } }"'
     result = run_command(repos_cmd)
@@ -22,24 +34,17 @@ def fetch_github_data() -> Dict[str, Any]:
         repos = json.loads(result) if result else []
         if isinstance(repos, list) and len(repos) > 0:
             print(f"[OK] Fetched {len(repos)} pinned repositories")
+        else:
+            print(f"[WARNING] No repos found or invalid format. Type: {type(repos)}")
     except json.JSONDecodeError as e:
         print(f"Warning: Failed to parse pinned repositories data: {e}")
 
-    # Fetch user stats
-    user_stats_cmd = 'gh api user --jq "{login, public_repos, followers, following}"'
-    user_stats: Dict[str, Any]
-    try:
-        user_stats = json.loads(run_command(user_stats_cmd))
-    except json.JSONDecodeError:
-        print("Warning: Failed to parse user stats data")
-        user_stats = {'login': 'Ian-bug', 'public_repos': 0, 'followers': 0, 'following': 0}
-
-    # Fetch recent activity (using events API) - simplified and working query
+    # Fetch recent activity (using events API) - simplified query
     activity_cmd = 'gh api users/Ian-bug/events/public --jq ".[:5] | map({name: .repo.name, url: .repo.url, created_at: .created_at}) | group_by(.name) | map({name: .[0].name, url: .[0].url, count: length, latest: .[0].created_at})"'
     activity: List[Dict[str, Any]] = []
     try:
         activity = json.loads(run_command(activity_cmd)) or []
-        print(f"[OK] Fetched {len(activity) if isinstance(activity, list) else 0} activity items")
+        print(f"[OK] Fetched {len(activity)} activity items")
     except json.JSONDecodeError:
         print("Warning: Failed to parse activity data")
         activity = []
@@ -101,6 +106,8 @@ def generate_activity_section(activity: List[Dict[str, Any]]) -> str:
         # Convert API URL to web URL
         if url and 'api.github.com/repos' in url:
             url = url.replace('api.github.com/repos', 'github.com')
+        elif url and 'api.github.com/repos' not in url and 'github.com/' not in url:
+            url = url.replace('github.com/', 'github.com/')
 
         # Format date nicely
         if latest:
