@@ -20,8 +20,14 @@ def fetch_github_data() -> Dict[str, Any]:
     repos: List[Dict[str, Any]]
     try:
         repos = json.loads(result) if result else []
+        # Debug logging
+        if not isinstance(repos, list):
+            print(f"Error: repos is not a list, got {type(repos)}")
+            print(f"Result content: {result[:500] if result else 'empty'}")
+            repos = []
     except json.JSONDecodeError:
         print("Warning: Failed to parse pinned repositories data")
+        print(f"Result content: {result[:500] if result else 'empty'}")
         repos = []
 
     # Fetch user stats
@@ -49,15 +55,29 @@ def fetch_github_data() -> Dict[str, Any]:
     }
 
 
-def generate_repos_section(repos: List[Dict[str, Any]]) -> str:
+def generate_repos_section(repos: Any) -> str:
     """Generate repositories section markdown"""
+    # Type checking and handling
     if not repos:
+        return "No repositories found."
+    
+    if isinstance(repos, str):
+        print(f"Warning: repos is a string: {repos}")
+        return "No repositories found."
+    
+    if not isinstance(repos, list):
+        print(f"Warning: repos is not a list: {type(repos)}")
         return "No repositories found."
 
     markdown = ""
     for repo in repos:
-        name: str = repo['name']
-        url: str = repo['url']
+        # Add defensive type checking for each repo
+        if not isinstance(repo, dict):
+            print(f"Warning: Skipping non-dict repo item: {type(repo)}")
+            continue
+        
+        name: str = repo.get('name', 'Unknown')
+        url: str = repo.get('url', '#')
         desc: str = repo.get('description') or 'No description'
         stars: int = repo.get('stargazerCount', 0)
         forks: int = repo.get('forkCount', 0)
@@ -103,8 +123,14 @@ def generate_activity_section(activity: List[Dict[str, Any]]) -> str:
 
 def generate_readme(data: Dict[str, Any]) -> str:
     """Generate complete README content"""
-    repos_section: str = generate_repos_section(data['repos'])
-    activity_section: str = generate_activity_section(data['activity'])
+    # Safely get repos with type checking
+    repos: Any = data.get('repos', [])
+    if not isinstance(repos, list):
+        print(f"Warning: repos is not a list, got {type(repos)}")
+        repos: Any = []
+    
+    repos_section: str = generate_repos_section(repos)
+    activity_section: str = generate_activity_section(data.get('activity', []))
     updated_time: str = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
 
     readme = f"""## Hi there 👋 I'm Ian (also named as o6md, bk5x)
