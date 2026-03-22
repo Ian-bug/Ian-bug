@@ -35,6 +35,8 @@ jobs:
           gh auth status
 
       - name: Update README
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python .github/scripts/update_readme.py
 

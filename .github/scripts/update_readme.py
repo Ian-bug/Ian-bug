@@ -1,4 +1,5 @@
 import json
+import os
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -7,7 +8,11 @@ from typing import Dict, List, Any, Optional
 
 def run_command(cmd: str) -> str:
     """Run a command and return output with proper encoding"""
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True, encoding='utf-8', errors='ignore')
+    env = os.environ.copy()
+    # Ensure GH_TOKEN is available to subprocess
+    if 'GH_TOKEN' not in env:
+        env['GH_TOKEN'] = os.environ.get('GH_TOKEN', '')
+    result = subprocess.run(cmd, shell=True, capture_output=True, text=True, encoding='utf-8', errors='ignore', env=env)
     return result.stdout
 
 
