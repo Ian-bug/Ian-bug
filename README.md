@@ -15,11 +15,20 @@
 
 ### 🔥 Recent Activity
 
-No recent activity.
+- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - 5 events (last: 2026-03-22)
+
 
 ### 🚀 Pinned Repositories
 
-No repositories found.
+- [ruin-injector](https://github.com/Ian-bug/ruin-injector) - A modern DLL injector built with Rust and egui, supporting both regular and UWP processes
+  - ⭐ 0 stars | 🍴 0 forks | 🔷 Rust
+- [RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - Standalone "Rain" style input visualizer for rhythm games. External, safe, and transparent.
+  - ⭐ 1 stars | 🍴 0 forks | 🔷 Python
+- [WhatIsBroDoing](https://github.com/Ian-bug/WhatIsBroDoing) - A Discord Rich Presence tool — displays your currently active program on Discord with customizable text and app name mapping
+  - ⭐ 0 stars | 🍴 1 forks | 🔷 Python
+- [ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - Modern landing website for Ruin DLL Injector - A lightweight Windows DLL injection tool built with Rust and egui
+  - ⭐ 0 stars | 🍴 0 forks | 🔷 TypeScript
+
 
 ### 🤝 Connect with Me
 
@@ -33,7 +42,7 @@ No repositories found.
 - 🤝 Following: 4
 
 ---
-✨ Last updated: 2026-03-22 15:20:38 UTC
+✨ Last updated: 2026-03-22 15:30:20 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
