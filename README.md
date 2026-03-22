@@ -29,12 +29,12 @@ No repositories found.
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y01WG0DL)
 
 ### 📈 GitHub Overview
-- 📦 Total Repositories: 0
-- 👥 Followers: 0
-- 🤝 Following: 0
+- 📦 Total Repositories: 8
+- 👥 Followers: 3
+- 🤝 Following: 4
 
 ---
-✨ Last updated: 2026-03-22 15:42:56 UTC
+✨ Last updated: 2026-03-22 15:52:27 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
