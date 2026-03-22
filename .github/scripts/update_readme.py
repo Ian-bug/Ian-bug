@@ -31,7 +31,7 @@ def fetch_github_data() -> Dict[str, Any]:
         user_stats = {'login': 'Ian-bug', 'public_repos': 0, 'followers': 0, 'following': 0}
 
     # Fetch pinned repositories using GraphQL with proper formatting
-    repos_cmd = r'gh api graphql --jq ".data.user.pinnedItems.nodes" -F login=Ian-bug -f query="query($login: String!) { user(login: $login) { pinnedItems(first: 6, types: REPOSITORY) { nodes { ... on Repository { name description url stargazerCount forkCount primaryLanguage { name } } } } } }"'
+    repos_cmd = r'gh api graphql -F login=Ian-bug -f query="query($login: String!) { user(login: $login) { pinnedItems(first: 6, types: REPOSITORY) { nodes { name description url stargazerCount forkCount primaryLanguage { name } } } } }" --jq ".data.user.pinnedItems.nodes"'
     result = run_command(repos_cmd)
 
     repos: List[Dict[str, Any]] = []
