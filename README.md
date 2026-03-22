@@ -9,17 +9,17 @@
 
 ---
 
-![I Use Windows BTW](https://raw.githubusercontent.com/Ian-bug/Ian-bug/main/screenshot.png)
-
 # I Use Windows BTW
+
+![I Use Windows BTW](screenshot.png)
 
 ### 🔥 Recent Activity
 
-- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - 1 events (last: 2026-03-22)
+- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - 2 events (last: 2026-03-22)
 - [Ian-bug/ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - 1 events (last: 2026-03-22)
 - [Ian-bug/Ian-bug.github.io](https://github.com/Ian-bug/Ian-bug.github.io) - 1 events (last: 2026-03-22)
 - [Ian-bug/ruin-injector](https://github.com/Ian-bug/ruin-injector) - 1 events (last: 2026-03-22)
-- [Ian-bug/RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - 6 events (last: 2026-03-22)
+- [Ian-bug/RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - 5 events (last: 2026-03-22)
 
 
 ### 🚀 Pinned Repositories
@@ -46,7 +46,7 @@
 - 🤝 Following: 4
 
 ---
-✨ Last updated: 2026-03-22 14:45:23 UTC
+✨ Last updated: 2026-03-22 14:56:43 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.

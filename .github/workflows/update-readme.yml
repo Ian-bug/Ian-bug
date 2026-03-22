@@ -29,6 +29,11 @@ jobs:
         run: |
           pip install -r .github/scripts/requirements.txt
 
+      - name: Authenticate GitHub CLI
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token --hostname github.com
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Update README
         run: |
           python .github/scripts/update_readme.py

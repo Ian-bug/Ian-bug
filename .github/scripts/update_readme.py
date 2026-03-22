@@ -1,4 +1,3 @@
-import sys
 import json
 import subprocess
 from datetime import datetime, timezone
@@ -14,12 +13,6 @@ def run_command(cmd: str) -> str:
 
 def fetch_github_data() -> Dict[str, Any]:
     """Fetch GitHub data using gh CLI"""
-    # Check if gh is authenticated
-    auth_check = run_command('gh auth status 2>&1')
-    if 'You are not logged in' in auth_check or 'not logged' in auth_check.lower():
-        print("Error: GitHub CLI not authenticated")
-        sys.exit(1)
-
     # Fetch pinned repositories using GraphQL with variables
     query = 'query($login: String!) { user(login: $login) { pinnedItems(first: 6, types: REPOSITORY) { nodes { ... on Repository { name description url stargazerCount forkCount primaryLanguage { name } } } } } }'
     repos_cmd = f'gh api graphql -f query="{query}" -F login=Ian-bug --jq ".data.user.pinnedItems.nodes"'
