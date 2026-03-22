@@ -17,42 +17,53 @@ def run_command(cmd: str) -> str:
 
 
 def fetch_github_data() -> Dict[str, Any]:
-    """Fetch GitHub data using gh CLI"""
     print("[DEBUG] Starting to fetch GitHub data...")
 
-    # Fetch user stats (simpler query)
+    # 1. Fetch User Stats
     user_stats_cmd = 'gh api user --jq "{login, public_repos, followers, following}"'
-    user_stats: Dict[str, Any]
     try:
         user_stats = json.loads(run_command(user_stats_cmd))
-        print(f"[DEBUG] User stats: {user_stats}")
-    except json.JSONDecodeError as e:
-        print(f"Warning: Failed to parse user stats data: {e}")
+    except:
         user_stats = {'login': 'Ian-bug', 'public_repos': 0, 'followers': 0, 'following': 0}
 
-    # Fetch pinned repositories using GraphQL with proper formatting
-    repos_cmd = r'gh api graphql -F login=Ian-bug -f query="query($login: String!) { user(login: $login) { pinnedItems(first: 6, types: REPOSITORY) { nodes { name description url stargazerCount forkCount primaryLanguage { name } } } } }" --jq ".data.user.pinnedItems.nodes"'
+    # 2. Fetch Pinned Repos (移除指令中的 --jq，改用 Python 處理)
+    query = """
+    query($login: String!) {
+      user(login: $login) {
+        pinnedItems(first: 6, types: REPOSITORY) {
+          nodes {
+            ... on Repository {
+              name
+              description
+              url
+              stargazerCount
+              forkCount
+              primaryLanguage { name }
+            }
+          }
+        }
+      }
+    }
+    """
+    repos_cmd = f'gh api graphql -F login=Ian-bug -f query="{query}"'
     result = run_command(repos_cmd)
-
-    repos: List[Dict[str, Any]] = []
+    
+    repos = []
     try:
-        repos = json.loads(result) if result else []
-        if isinstance(repos, list) and len(repos) > 0:
-            print(f"[OK] Fetched {len(repos)} pinned repositories")
-        else:
-            print(f"[WARNING] No repos found or invalid format. Type: {type(repos)}")
-    except json.JSONDecodeError as e:
-        print(f"Warning: Failed to parse pinned repositories data: {e}")
+        raw_json = json.loads(result)
+        # 關鍵點：從 Dict 中一層層挖出 List
+        repos = raw_json.get('data', {}).get('user', {}).get('pinnedItems', {}).get('nodes', [])
+        print(f"[OK] Fetched {len(repos)} pinned repositories")
+    except Exception as e:
+        print(f"Warning: Failed to parse repos: {e}")
 
-    # Fetch recent activity (using events API) - simplified query
-    activity_cmd = 'gh api users/Ian-bug/events/public --jq ".[:5] | map({name: .repo.name, url: .repo.url, created_at: .created_at}) | group_by(.name) | map({name: .[0].name, url: .[0].url, count: length, latest: .[0].created_at})"'
-    activity: List[Dict[str, Any]] = []
+    # 3. Fetch Recent Activity
+    activity_cmd = 'gh api users/Ian-bug/events/public --jq ".[:5] | map({name: .repo.name, url: .repo.url, created_at: .created_at})"'
+    activity = []
     try:
-        activity = json.loads(run_command(activity_cmd)) or []
-        print(f"[OK] Fetched {len(activity)} activity items")
-    except json.JSONDecodeError:
-        print("Warning: Failed to parse activity data")
-        activity = []
+        activity = json.loads(run_command(activity_cmd))
+    except:
+        pass
 
     return {
         'repos': repos,
