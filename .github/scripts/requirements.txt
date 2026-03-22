@@ -1,0 +1,7 @@
+# Python dependencies for update_readme.py
+# Note: This script currently uses only Python standard library
+# This file is reserved for future dependencies if needed
+
+# Example dependencies (commented out as they're not currently needed):
+# requests==2.31.0
+# pygithub==1.59.1
