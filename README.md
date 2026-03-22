@@ -20,15 +20,7 @@
 
 ### 🚀 Pinned Repositories
 
-- [ruin-injector](https://github.com/Ian-bug/ruin-injector) - A modern DLL injector built with Rust and egui, supporting both regular and UWP processes
-  - ⭐ 0 stars | 🍴 0 forks | 🔷 Rust
-- [RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - Standalone "Rain" style input visualizer for rhythm games. External, safe, and transparent.
-  - ⭐ 1 stars | 🍴 0 forks | 🔷 Python
-- [WhatIsBroDoing](https://github.com/Ian-bug/WhatIsBroDoing) - A Discord Rich Presence tool — displays your currently active program on Discord with customizable text and app name mapping
-  - ⭐ 0 stars | 🍴 1 forks | 🔷 Python
-- [ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - Modern landing website for Ruin DLL Injector - A lightweight Windows DLL injection tool built with Rust and egui
-  - ⭐ 0 stars | 🍴 0 forks | 🔷 TypeScript
-
+No repositories found.
 
 ### 🤝 Connect with Me
 
@@ -37,12 +29,12 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y01WG0DL)
 
 ### 📈 GitHub Overview
-- 📦 Total Repositories: 8
-- 👥 Followers: 3
-- 🤝 Following: 4
+- 📦 Total Repositories: 0
+- 👥 Followers: 0
+- 🤝 Following: 0
 
 ---
-✨ Last updated: 2026-03-22 15:30:20 UTC
+✨ Last updated: 2026-03-22 15:31:24 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
