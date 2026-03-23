@@ -198,9 +198,9 @@ def generate_readme(data: Dict[str, Any]) -> str:
 
 ---
 
-![I Use Windows BTW](screenshot.png)
-
 # I Use Windows BTW
+
+![I Use Windows BTW](screenshot.png)
 
 ### 🔥 Recent Activity
 
