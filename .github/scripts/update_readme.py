@@ -1,6 +1,7 @@
 import json
 import os
 import subprocess
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Any, Optional
@@ -21,6 +22,54 @@ def run_command(cmd: str) -> str:
     return result.stdout
 
 
+def fetch_pinned_repos() -> List[Dict[str, Any]]:
+    """Fetch pinned repositories using GitHub GraphQL API directly"""
+    query = '''query($login: String!) {
+      user(login: $login) {
+        pinnedItems(first: 6, types: REPOSITORY) {
+          nodes {
+            ... on Repository {
+              name
+              description
+              url
+              stargazerCount
+              forkCount
+              primaryLanguage { name }
+            }
+          }
+        }
+      }
+    }'''
+    
+    # Get token
+    token = os.environ.get('GH_TOKEN') or os.environ.get('GITHUB_TOKEN')
+    if not token:
+        print("Warning: No GitHub token found, falling back to gh CLI")
+        return []
+    
+    # Make GraphQL request
+    url = 'https://api.github.com/graphql'
+    data = json.dumps({'query': query, 'variables': {'login': GITHUB_USERNAME}}).encode('utf-8')
+    
+    req = urllib.request.Request(
+        url,
+        data=data,
+        headers={
+            'Authorization': f'Bearer {token}',
+            'Content-Type': 'application/json',
+            'User-Agent': 'Ian-bug-profile-updater'
+        }
+    )
+    
+    try:
+        with urllib.request.urlopen(req) as response:
+            result = json.loads(response.read().decode('utf-8'))
+            return result.get('data', {}).get('user', {}).get('pinnedItems', {}).get('nodes', [])
+    except Exception as e:
+        print(f"Warning: Failed to fetch pinned repos via GraphQL: {e}")
+        return []
+
+
 def fetch_github_data() -> Dict[str, Any]:
     print(f"[DEBUG] Starting to fetch GitHub data for {GITHUB_USERNAME}...")
 
@@ -32,16 +81,12 @@ def fetch_github_data() -> Dict[str, Any]:
         print(f"Warning: Failed to fetch user stats: {e}")
         user_stats = {'login': GITHUB_USERNAME, 'public_repos': 0, 'followers': 0, 'following': 0}
 
-    # 2. Fetch Repositories using gh repo list (more reliable than GraphQL)
-    repos_cmd = f'gh repo list {GITHUB_USERNAME} --limit 6 --json name,description,url,stargazerCount,forkCount,primaryLanguage'
-    result = run_command(repos_cmd)
-    
-    repos = []
-    try:
-        repos = json.loads(result)
-        print(f"[OK] Fetched {len(repos)} repositories")
-    except (json.JSONDecodeError, KeyError, ValueError) as e:
-        print(f"Warning: Failed to parse repos: {e}")
+    # 2. Fetch Pinned Repositories using GraphQL API
+    repos = fetch_pinned_repos()
+    if not repos:
+        print("Warning: No pinned repositories found via GraphQL")
+    else:
+        print(f"[OK] Fetched {len(repos)} pinned repositories")
 
     # 3. Fetch Recent Activity
     activity_cmd = f'gh api users/{GITHUB_USERNAME}/events/public --jq ".[:5] | map({{name: .repo.name, url: .repo.url, created_at: .created_at}})"'
@@ -81,6 +126,9 @@ def generate_repos_section(repos: Any) -> str:
 
         name: str = repo.get('name', 'Unknown')
         url: str = repo.get('url', '#')
+        # Ensure URL uses HTTPS (GitHub GraphQL sometimes returns http://)
+        if url and url.startswith('http://'):
+            url = url.replace('http://', 'https://', 1)
         desc: str = repo.get('description') or 'No description'
         stars: int = repo.get('stargazerCount', 0)
         forks: int = repo.get('forkCount', 0)
@@ -108,6 +156,9 @@ def generate_activity_section(activity: List[Dict[str, Any]]) -> str:
         # Convert API URL to web URL
         if url and 'api.github.com/repos' in url:
             url = url.replace('api.github.com/repos', 'github.com')
+        # Ensure URL uses HTTPS
+        if url and url.startswith('http://'):
+            url = url.replace('http://', 'https://', 1)
 
         # Format date nicely
         date_str = 'recently'
@@ -155,7 +206,7 @@ def generate_readme(data: Dict[str, Any]) -> str:
 
 {activity_section}
 
-### 🚀 Top Repositories
+### 🚀 Pinned Repositories
 
 {repos_section}
 
