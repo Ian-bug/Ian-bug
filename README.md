@@ -15,16 +15,28 @@
 
 ### 🔥 Recent Activity
 
-- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - 0 events (last: recently)
-- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - 0 events (last: recently)
-- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - 0 events (last: recently)
-- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - 0 events (last: recently)
-- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - 0 events (last: recently)
+- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-03-22
+- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-03-22
+- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-03-22
+- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-03-22
+- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-03-22
 
 
-### 🚀 Pinned Repositories
+### 🚀 Top Repositories
 
-No repositories found.
+- [Ian-bug](https://github.com/Ian-bug/Ian-bug) - Ian's github profile
+  - ⭐ 0 stars | 🍴 0 forks | 🔷 Unknown
+- [ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - Modern landing website for Ruin DLL Injector - A lightweight Windows DLL injection tool built with Rust and egui
+  - ⭐ 0 stars | 🍴 0 forks | 🔷 TypeScript
+- [Ian-bug.github.io](https://github.com/Ian-bug/Ian-bug.github.io) - Portfolio Website
+  - ⭐ 0 stars | 🍴 0 forks | 🔷 TypeScript
+- [ruin-injector](https://github.com/Ian-bug/ruin-injector) - A modern DLL injector built with Rust and egui, supporting both regular and UWP processes
+  - ⭐ 0 stars | 🍴 0 forks | 🔷 Rust
+- [RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - Standalone "Rain" style input visualizer for rhythm games. External, safe, and transparent.
+  - ⭐ 1 stars | 🍴 0 forks | 🔷 Python
+- [endlessopt](https://github.com/Ian-bug/endlessopt) - System optimization tool for Windows
+  - ⭐ 0 stars | 🍴 0 forks | 🔷 Rust
+
 
 ### 🤝 Connect with Me
 
@@ -38,7 +50,7 @@ No repositories found.
 - 🤝 Following: 4
 
 ---
-✨ Last updated: 2026-03-23 07:23:30 UTC
+✨ Last updated: 2026-03-23 10:24:19 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.

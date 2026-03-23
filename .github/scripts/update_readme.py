@@ -5,6 +5,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
+# Get username from environment variable or default to Ian-bug
+GITHUB_USERNAME = os.environ.get('GITHUB_USERNAME', 'Ian-bug')
+
 
 def run_command(cmd: str) -> str:
     """Run a command and return output with proper encoding"""
@@ -12,58 +15,41 @@ def run_command(cmd: str) -> str:
     # Ensure GH_TOKEN is available to subprocess
     if 'GH_TOKEN' not in env:
         env['GH_TOKEN'] = os.environ.get('GH_TOKEN', '')
+    if 'GITHUB_TOKEN' not in env:
+        env['GITHUB_TOKEN'] = os.environ.get('GITHUB_TOKEN', '')
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True, encoding='utf-8', errors='ignore', env=env)
     return result.stdout
 
 
 def fetch_github_data() -> Dict[str, Any]:
-    print("[DEBUG] Starting to fetch GitHub data...")
+    print(f"[DEBUG] Starting to fetch GitHub data for {GITHUB_USERNAME}...")
 
     # 1. Fetch User Stats
-    user_stats_cmd = 'gh api user --jq "{login, public_repos, followers, following}"'
+    user_stats_cmd = f'gh api user --jq "{{login, public_repos, followers, following}}"'
     try:
         user_stats = json.loads(run_command(user_stats_cmd))
-    except:
-        user_stats = {'login': 'Ian-bug', 'public_repos': 0, 'followers': 0, 'following': 0}
+    except (json.JSONDecodeError, KeyError, ValueError) as e:
+        print(f"Warning: Failed to fetch user stats: {e}")
+        user_stats = {'login': GITHUB_USERNAME, 'public_repos': 0, 'followers': 0, 'following': 0}
 
-    # 2. Fetch Pinned Repos (移除指令中的 --jq，改用 Python 處理)
-    query = """
-    query($login: String!) {
-      user(login: $login) {
-        pinnedItems(first: 6, types: REPOSITORY) {
-          nodes {
-            ... on Repository {
-              name
-              description
-              url
-              stargazerCount
-              forkCount
-              primaryLanguage { name }
-            }
-          }
-        }
-      }
-    }
-    """
-    repos_cmd = f'gh api graphql -F login=Ian-bug -f query="{query}"'
+    # 2. Fetch Repositories using gh repo list (more reliable than GraphQL)
+    repos_cmd = f'gh repo list {GITHUB_USERNAME} --limit 6 --json name,description,url,stargazerCount,forkCount,primaryLanguage'
     result = run_command(repos_cmd)
     
     repos = []
     try:
-        raw_json = json.loads(result)
-        # 關鍵點：從 Dict 中一層層挖出 List
-        repos = raw_json.get('data', {}).get('user', {}).get('pinnedItems', {}).get('nodes', [])
-        print(f"[OK] Fetched {len(repos)} pinned repositories")
-    except Exception as e:
+        repos = json.loads(result)
+        print(f"[OK] Fetched {len(repos)} repositories")
+    except (json.JSONDecodeError, KeyError, ValueError) as e:
         print(f"Warning: Failed to parse repos: {e}")
 
     # 3. Fetch Recent Activity
-    activity_cmd = 'gh api users/Ian-bug/events/public --jq ".[:5] | map({name: .repo.name, url: .repo.url, created_at: .created_at})"'
+    activity_cmd = f'gh api users/{GITHUB_USERNAME}/events/public --jq ".[:5] | map({{name: .repo.name, url: .repo.url, created_at: .created_at}})"'
     activity = []
     try:
         activity = json.loads(run_command(activity_cmd))
-    except:
-        pass
+    except (json.JSONDecodeError, KeyError, ValueError) as e:
+        print(f"Warning: Failed to parse activity: {e}")
 
     return {
         'repos': repos,
@@ -113,29 +99,27 @@ def generate_activity_section(activity: List[Dict[str, Any]]) -> str:
         return "No recent activity."
 
     markdown = ""
-    for item in sorted(activity[:5], key=lambda x: str(x.get('latest', '')), reverse=True):
+    # Sort by created_at in descending order (most recent first)
+    for item in sorted(activity[:5], key=lambda x: x.get('created_at', ''), reverse=True):
         name: str = item.get('name', 'Unknown')
         url: str = item.get('url', '#')
-        count: int = item.get('count', 0)
-        latest: str = item.get('latest', '')
+        created_at: str = item.get('created_at', '')
 
         # Convert API URL to web URL
         if url and 'api.github.com/repos' in url:
             url = url.replace('api.github.com/repos', 'github.com')
-        elif url and 'api.github.com/repos' not in url and 'github.com/' not in url:
-            url = url.replace('github.com/', 'github.com/')
 
         # Format date nicely
-        if latest:
+        date_str = 'recently'
+        if created_at:
             try:
-                dt = datetime.fromisoformat(latest.replace('Z', '+00:00'))
-                date_str: str = dt.strftime('%Y-%m-%d')
-            except Exception:
+                dt = datetime.fromisoformat(created_at.replace('Z', '+00:00'))
+                date_str = dt.strftime('%Y-%m-%d')
+            except (ValueError, AttributeError) as e:
+                print(f"Warning: Failed to parse date '{created_at}': {e}")
                 date_str = 'recently'
-        else:
-            date_str = 'recently'
 
-        markdown += f"- [{name}]({url}) - {count} events (last: {date_str})\n"
+        markdown += f"- [{name}]({url}) - last activity: {date_str}\n"
 
     return markdown
 
@@ -146,7 +130,7 @@ def generate_readme(data: Dict[str, Any]) -> str:
     repos: Any = data.get('repos', [])
     if not isinstance(repos, list):
         print(f"Warning: repos is not a list, got {type(repos)}")
-        repos: Any = []
+        repos = []
 
     repos_section: str = generate_repos_section(repos)
     activity_section: str = generate_activity_section(data.get('activity', []))
@@ -154,12 +138,12 @@ def generate_readme(data: Dict[str, Any]) -> str:
 
     readme = f"""## Hi there 👋 I'm Ian (also named as o6md, bk5x)
 
-<img src="https://count.getloli.com/get/@Ian-bug?theme=rule34" alt="Profile Views" />
+<img src="https://count.getloli.com/get/@{GITHUB_USERNAME}?theme=rule34" alt="Profile Views" />
 
 ### 📊 Stats
-<img src="https://github-readme-stats.vercel.app/api?username=Ian-bug&show_icons=true&theme=radical&hide_border=true" alt="GitHub Stats" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Ian-bug&layout=compact&theme=radical&hide_border=true" alt="Top Languages" />
-<img src="https://github-readme-streak-stats.herokuapp.com?user=Ian-bug&theme=radical&hide_border=true" alt="GitHub Streak" />
+<img src="https://github-readme-stats.vercel.app/api?username={GITHUB_USERNAME}&show_icons=true&theme=radical&hide_border=true" alt="GitHub Stats" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username={GITHUB_USERNAME}&layout=compact&theme=radical&hide_border=true" alt="Top Languages" />
+<img src="https://github-readme-streak-stats.herokuapp.com?user={GITHUB_USERNAME}&theme=radical&hide_border=true" alt="GitHub Streak" />
 
 ---
 
@@ -171,13 +155,13 @@ def generate_readme(data: Dict[str, Any]) -> str:
 
 {activity_section}
 
-### 🚀 Pinned Repositories
+### 🚀 Top Repositories
 
 {repos_section}
 
 ### 🤝 Connect with Me
 
-- 💼 GitHub: [Ian-bug](https://github.com/Ian-bug)
+- 💼 GitHub: [{GITHUB_USERNAME}](https://github.com/{GITHUB_USERNAME})
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y01WG0DL)
 
@@ -190,7 +174,7 @@ def generate_readme(data: Dict[str, Any]) -> str:
 ✨ Last updated: {updated_time}
 
 <!--
-**Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+**{GITHUB_USERNAME}/{GITHUB_USERNAME}** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
 Here are some ideas to get you started:
 

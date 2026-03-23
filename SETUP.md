@@ -24,7 +24,26 @@ Make sure GitHub Actions are enabled for this repository:
 - Go to Settings > Actions > General
 - Under "Actions permissions", select "Allow all actions and reusable workflows"
 
-### 3. Verify Permissions
+### 3. Set Up GitHub Personal Access Token (PAT)
+
+The workflow requires a Personal Access Token to fetch data and push changes:
+
+1. Go to GitHub Settings > Developer settings > Personal access tokens > Tokens (classic)
+2. Click "Generate new token (classic)"
+3. Give it a descriptive name (e.g., "Profile README Update")
+4. Select the following scopes:
+   - `repo` (full control of private repositories)
+   - `workflow` (update GitHub Action workflows)
+5. Generate the token and copy it
+6. In your repository, go to Settings > Secrets and variables > Actions
+7. Click "New repository secret"
+8. Name: `GH_PAT`
+9. Value: Paste the token you created
+10. Click "Add secret"
+
+⚠️ **Important**: Keep your token secure and never commit it to the repository.
+
+### 4. Verify Permissions
 
 The workflow file already includes the necessary permissions:
 ```yaml
@@ -32,7 +51,7 @@ permissions:
   contents: write
 ```
 
-### 4. Manually Trigger First Update
+### 5. Manually Trigger First Update
 
 You can trigger the workflow manually to generate the initial README:
 - Go to Actions tab
@@ -45,19 +64,28 @@ Or push any change to the main branch to trigger it automatically.
 
 ### Modify Displayed Repositories
 
-The script displays your **pinned repositories** from GitHub. To change which repos appear:
-1. Go to your GitHub profile
-2. Click "Customize your pins" or edit your profile
-3. Pin/unpin repositories as desired
-4. The changes will appear after the next auto-update
-
-Note: You can pin up to 6 repositories on your GitHub profile.
+The script displays your **top repositories** (up to 6) fetched via GitHub CLI. To change which repos appear:
+1. The script currently fetches your most recently updated repositories
+2. To display specific repositories, modify the `fetch_github_data()` function
+3. Or star/fork more active repositories to influence the sort order
 
 ### Change Username
 
-Replace `Ian-bug` with your GitHub username in:
-- `.github/scripts/update_readme.py` (multiple occurrences)
-- Any profile view URLs
+The username can be configured via the `GITHUB_USERNAME` environment variable:
+
+**Option 1: Environment Variable (Recommended)**
+- Set `GITHUB_USERNAME` in the workflow:
+```yaml
+env:
+  GITHUB_USERNAME: your-username
+  GH_TOKEN: ${{ secrets.GH_PAT }}
+```
+
+**Option 2: Hardcode in Script**
+- Replace the default value in `.github/scripts/update_readme.py`:
+```python
+GITHUB_USERNAME = os.environ.get('GITHUB_USERNAME', 'your-username')
+```
 
 ### Update Schedule
 
@@ -98,16 +126,16 @@ Edit the `generate_readme()` function in `.github/scripts/update_readme.py` to m
 ## 🚀 How It Works
 
 1. **GitHub Actions Trigger**: Runs every 6 hours or on manual dispatch
-2. **Fetch Data**: Uses GitHub CLI to fetch:
-   - Your pinned repositories
+2. **Fetch Data**: Uses GitHub CLI (`gh` command) to fetch:
+   - Your top repositories (by recent activity)
    - User statistics (followers, following, repo count)
-   - Recent commit activity
+   - Recent public activity events
 3. **Generate README**: Python script creates markdown with:
    - Profile statistics
-   - Pinned repositories with details
+   - Top repositories with details
    - Recent activity
    - Visual stats cards from GitHub Readme Stats
-4. **Commit & Push**: Automatically commits and pushes changes
+4. **Commit & Push**: Automatically pulls latest changes, commits, and pushes updates
 
 ## 📊 Included Metrics
 
@@ -122,7 +150,7 @@ Edit the `generate_readme()` function in `.github/scripts/update_readme.py` to m
 - Repository count
 - Follower count
 - Following count
-- Recent repository activity
+- Recent public activity events
 - Top repositories with:
   - Description
   - Star count

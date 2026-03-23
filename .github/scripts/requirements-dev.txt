@@ -1,0 +1,6 @@
+# Add pytest as a dev dependency for running tests
+# This file is optional since update_readme.py only uses stdlib
+# but useful if you want to run the test suite
+
+# pytest==8.0.0
+# pytest-cov==4.0.0
