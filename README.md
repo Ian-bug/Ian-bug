@@ -15,7 +15,7 @@
 
 ### 🔥 Recent Activity
 
-- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-03-22
+- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-03-23
 - [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-03-22
 - [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-03-22
 - [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-03-22
@@ -25,7 +25,7 @@
 ### 🚀 Top Repositories
 
 - [Ian-bug](https://github.com/Ian-bug/Ian-bug) - Ian's github profile
-  - ⭐ 0 stars | 🍴 0 forks | 🔷 Unknown
+  - ⭐ 0 stars | 🍴 0 forks | 🔷 Python
 - [ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - Modern landing website for Ruin DLL Injector - A lightweight Windows DLL injection tool built with Rust and egui
   - ⭐ 0 stars | 🍴 0 forks | 🔷 TypeScript
 - [Ian-bug.github.io](https://github.com/Ian-bug/Ian-bug.github.io) - Portfolio Website
@@ -50,7 +50,7 @@
 - 🤝 Following: 4
 
 ---
-✨ Last updated: 2026-03-23 10:24:19 UTC
+✨ Last updated: 2026-03-23 10:26:49 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
