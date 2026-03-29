@@ -16,6 +16,20 @@ extend-exclude = '''
 )/
 '''
 
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+check_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = false
+
 [tool.pylint.messages_control]
 disable = [
     'C0111',  # missing-docstring
@@ -34,3 +48,4 @@ testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
+addopts = "-v --cov=.github/scripts/update_readme --cov-report=term-missing"

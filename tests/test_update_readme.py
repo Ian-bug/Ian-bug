@@ -182,42 +182,40 @@ class TestGenerateReadme:
         result = generate_readme(data)
         assert "test-repo" in result
         assert "1 stars" in result
-        assert "Top Repositories" in result
+        assert "Pinned Repositories" in result
 
 
 @patch("update_readme.run_command")
+@patch("update_readme.fetch_pinned_repos")
 class TestFetchGithubData:
     """Test GitHub data fetching"""
 
-    def test_fetch_all_success(self, mock_run):
+    def test_fetch_all_success(self, mock_fetch_repos, mock_run):
         """Test successful data fetching"""
-        # Mock user stats
-        mock_run.return_value = json.dumps({"login": "testuser", "public_repos": 5, "followers": 10, "following": 3})
-
-        # Mock repos
+        # Mock user stats and activity
         mock_run.side_effect = [
             json.dumps({"login": "testuser", "public_repos": 5, "followers": 10, "following": 3}),
             json.dumps(
                 [
                     {
                         "name": "test-repo",
-                        "url": "https://github.com/test/test-repo",
-                        "description": "Test",
-                        "stargazerCount": 1,
-                        "forkCount": 0,
-                        "primaryLanguage": {"name": "Python"},
-                    }
-                ]
-            ),
-            json.dumps(
-                [
-                    {
-                        "name": "test-repo",
-                        "url": "https://github.com/test/test-repo",
+                        "url": "https://api.github.com/repos/test/test-repo",
                         "created_at": "2024-01-01T00:00:00Z",
                     }
                 ]
             ),
+        ]
+
+        # Mock repos
+        mock_fetch_repos.return_value = [
+            {
+                "name": "test-repo",
+                "url": "https://github.com/test/test-repo",
+                "description": "Test",
+                "stargazerCount": 1,
+                "forkCount": 0,
+                "primaryLanguage": {"name": "Python"},
+            }
         ]
 
         data = fetch_github_data()
@@ -228,10 +226,11 @@ class TestFetchGithubData:
         assert data["stats"]["public_repos"] == 5
         assert len(data["activity"]) == 1
 
-    def test_fetch_with_json_error(self, mock_run):
+    def test_fetch_with_json_error(self, mock_fetch_repos, mock_run):
         """Test handling of JSON parsing errors"""
         # Mock user stats with invalid JSON
-        mock_run.side_effect = ["invalid json", "[]", "[]"]
+        mock_run.side_effect = ["invalid json", "[]"]
+        mock_fetch_repos.return_value = []
 
         data = fetch_github_data()
         assert "stats" in data

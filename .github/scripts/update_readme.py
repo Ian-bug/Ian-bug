@@ -2,29 +2,36 @@ import json
 import os
 import subprocess
 import urllib.request
+import urllib.error
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
-# Get username from environment variable or default to Ian-bug
-GITHUB_USERNAME = os.environ.get('GITHUB_USERNAME', 'Ian-bug')
+# Constants
+GITHUB_USERNAME = os.environ.get("GITHUB_USERNAME", "Ian-bug")
+GITHUB_API_URL = "https://api.github.com/graphql"
+MAX_PINNED_REPOS = 6
+MAX_ACTIVITY_ITEMS = 5
+USER_AGENT = "Ian-bug-profile-updater"
 
 
 def run_command(cmd: str) -> str:
     """Run a command and return output with proper encoding"""
     env = os.environ.copy()
-    # Ensure GH_TOKEN is available to subprocess
-    if 'GH_TOKEN' not in env:
-        env['GH_TOKEN'] = os.environ.get('GH_TOKEN', '')
-    if 'GITHUB_TOKEN' not in env:
-        env['GITHUB_TOKEN'] = os.environ.get('GITHUB_TOKEN', '')
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True, encoding='utf-8', errors='ignore', env=env)
+    result = subprocess.run(
+        cmd, shell=True, capture_output=True, text=True, encoding="utf-8", errors="ignore", env=env
+    )
     return result.stdout
 
 
 def fetch_pinned_repos() -> List[Dict[str, Any]]:
     """Fetch pinned repositories using GitHub GraphQL API directly"""
-    query = '''query($login: String!) {
+    token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")
+    if not token:
+        print("Warning: No GitHub token found, skipping pinned repos fetch")
+        return []
+
+    query = """query($login: String!) {
       user(login: $login) {
         pinnedItems(first: 6, types: REPOSITORY) {
           nodes {
@@ -39,32 +46,33 @@ def fetch_pinned_repos() -> List[Dict[str, Any]]:
           }
         }
       }
-    }'''
-    
-    # Get token
-    token = os.environ.get('GH_TOKEN') or os.environ.get('GITHUB_TOKEN')
-    if not token:
-        print("Warning: No GitHub token found, falling back to gh CLI")
-        return []
-    
+    }"""
+
     # Make GraphQL request
-    url = 'https://api.github.com/graphql'
-    data = json.dumps({'query': query, 'variables': {'login': GITHUB_USERNAME}}).encode('utf-8')
-    
+    url = "https://api.github.com/graphql"
+    data = json.dumps({"query": query, "variables": {"login": GITHUB_USERNAME}}).encode("utf-8")
+
     req = urllib.request.Request(
         url,
         data=data,
         headers={
-            'Authorization': f'Bearer {token}',
-            'Content-Type': 'application/json',
-            'User-Agent': 'Ian-bug-profile-updater'
-        }
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+            "User-Agent": "Ian-bug-profile-updater",
+        },
     )
-    
+
     try:
-        with urllib.request.urlopen(req) as response:
-            result = json.loads(response.read().decode('utf-8'))
-            return result.get('data', {}).get('user', {}).get('pinnedItems', {}).get('nodes', [])
+        with urllib.request.urlopen(req, timeout=30) as response:
+            result = json.loads(response.read().decode("utf-8"))
+            nodes = result.get("data", {}).get("user", {}).get("pinnedItems", {}).get("nodes", [])
+            return nodes if isinstance(nodes, list) else []
+    except urllib.error.URLError as e:
+        print(f"Warning: Failed to fetch pinned repos (network error): {e}")
+        return []
+    except json.JSONDecodeError as e:
+        print(f"Warning: Failed to parse GraphQL response: {e}")
+        return []
     except Exception as e:
         print(f"Warning: Failed to fetch pinned repos via GraphQL: {e}")
         return []
@@ -74,12 +82,12 @@ def fetch_github_data() -> Dict[str, Any]:
     print(f"[DEBUG] Starting to fetch GitHub data for {GITHUB_USERNAME}...")
 
     # 1. Fetch User Stats
-    user_stats_cmd = f'gh api user --jq "{{login, public_repos, followers, following}}"'
+    user_stats_cmd = 'gh api user --jq "{login, public_repos, followers, following}"'
     try:
         user_stats = json.loads(run_command(user_stats_cmd))
     except (json.JSONDecodeError, KeyError, ValueError) as e:
         print(f"Warning: Failed to fetch user stats: {e}")
-        user_stats = {'login': GITHUB_USERNAME, 'public_repos': 0, 'followers': 0, 'following': 0}
+        user_stats = {"login": GITHUB_USERNAME, "public_repos": 0, "followers": 0, "following": 0}
 
     # 2. Fetch Pinned Repositories using GraphQL API
     repos = fetch_pinned_repos()
@@ -89,18 +97,39 @@ def fetch_github_data() -> Dict[str, Any]:
         print(f"[OK] Fetched {len(repos)} pinned repositories")
 
     # 3. Fetch Recent Activity
-    activity_cmd = f'gh api users/{GITHUB_USERNAME}/events/public --jq ".[:5] | map({{name: .repo.name, url: .repo.url, created_at: .created_at}})"'
+    jq_template = ".[:{limit}] | map({{name: .repo.name, url: .repo.url, created_at: .created_at}})"
+    jq_filter = jq_template.format(limit=MAX_ACTIVITY_ITEMS)
+    activity_cmd = f'gh api users/{GITHUB_USERNAME}/events/public --jq "{jq_filter}"'
     activity = []
     try:
         activity = json.loads(run_command(activity_cmd))
     except (json.JSONDecodeError, KeyError, ValueError) as e:
         print(f"Warning: Failed to parse activity: {e}")
 
-    return {
-        'repos': repos,
-        'stats': user_stats,
-        'activity': activity
-    }
+    return {"repos": repos, "stats": user_stats, "activity": activity}
+
+
+def normalize_url(url: str) -> str:
+    """Normalize URL to use HTTPS and convert API URLs to web URLs"""
+    if not url:
+        return "#"
+    # Ensure HTTPS
+    url = url.replace("http://", "https://", 1)
+    # Convert API URL to web URL
+    url = url.replace("api.github.com/repos", "github.com")
+    return url
+
+
+def format_date(date_string: str) -> str:
+    """Format ISO date string to YYYY-MM-DD format"""
+    if not date_string:
+        return "recently"
+    try:
+        dt = datetime.fromisoformat(date_string.replace("Z", "+00:00"))
+        return dt.strftime("%Y-%m-%d")
+    except (ValueError, AttributeError) as e:
+        print(f"Warning: Failed to parse date '{date_string}': {e}")
+        return "recently"
 
 
 def generate_repos_section(repos: Any) -> str:
@@ -124,16 +153,13 @@ def generate_repos_section(repos: Any) -> str:
             print(f"Warning: Skipping non-dict repo item: {type(repo)}")
             continue
 
-        name: str = repo.get('name', 'Unknown')
-        url: str = repo.get('url', '#')
-        # Ensure URL uses HTTPS (GitHub GraphQL sometimes returns http://)
-        if url and url.startswith('http://'):
-            url = url.replace('http://', 'https://', 1)
-        desc: str = repo.get('description') or 'No description'
-        stars: int = repo.get('stargazerCount', 0)
-        forks: int = repo.get('forkCount', 0)
-        primary_lang: Optional[Dict[str, str]] = repo.get('primaryLanguage')
-        lang: str = primary_lang.get('name', 'Unknown') if primary_lang else 'Unknown'
+        name: str = repo.get("name", "Unknown")
+        url: str = normalize_url(repo.get("url", "#"))
+        desc: str = repo.get("description") or "No description"
+        stars: int = repo.get("stargazerCount", 0)
+        forks: int = repo.get("forkCount", 0)
+        primary_lang: Optional[Dict[str, str]] = repo.get("primaryLanguage")
+        lang: str = primary_lang.get("name", "Unknown") if primary_lang else "Unknown"
 
         markdown += f"- [{name}]({url}) - {desc}\n"
         markdown += f"  - ⭐ {stars} stars | 🍴 {forks} forks | 🔷 {lang}\n"
@@ -148,27 +174,13 @@ def generate_activity_section(activity: List[Dict[str, Any]]) -> str:
 
     markdown = ""
     # Sort by created_at in descending order (most recent first)
-    for item in sorted(activity[:5], key=lambda x: x.get('created_at', ''), reverse=True):
-        name: str = item.get('name', 'Unknown')
-        url: str = item.get('url', '#')
-        created_at: str = item.get('created_at', '')
-
-        # Convert API URL to web URL
-        if url and 'api.github.com/repos' in url:
-            url = url.replace('api.github.com/repos', 'github.com')
-        # Ensure URL uses HTTPS
-        if url and url.startswith('http://'):
-            url = url.replace('http://', 'https://', 1)
-
-        # Format date nicely
-        date_str = 'recently'
-        if created_at:
-            try:
-                dt = datetime.fromisoformat(created_at.replace('Z', '+00:00'))
-                date_str = dt.strftime('%Y-%m-%d')
-            except (ValueError, AttributeError) as e:
-                print(f"Warning: Failed to parse date '{created_at}': {e}")
-                date_str = 'recently'
+    for item in sorted(
+        activity[:MAX_ACTIVITY_ITEMS], key=lambda x: x.get("created_at", ""), reverse=True
+    ):
+        name: str = item.get("name", "Unknown")
+        url: str = normalize_url(item.get("url", "#"))
+        created_at: str = item.get("created_at", "")
+        date_str = format_date(created_at)
 
         markdown += f"- [{name}]({url}) - last activity: {date_str}\n"
 
@@ -178,23 +190,34 @@ def generate_activity_section(activity: List[Dict[str, Any]]) -> str:
 def generate_readme(data: Dict[str, Any]) -> str:
     """Generate complete README content"""
     # Safely get repos with type checking
-    repos: Any = data.get('repos', [])
+    repos: Any = data.get("repos", [])
     if not isinstance(repos, list):
         print(f"Warning: repos is not a list, got {type(repos)}")
         repos = []
 
     repos_section: str = generate_repos_section(repos)
-    activity_section: str = generate_activity_section(data.get('activity', []))
-    updated_time: str = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
+    activity_section: str = generate_activity_section(data.get("activity", []))
+    updated_time: str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+    stats_base = "https://github-readme-stats.vercel.app/api"
+    stats_url = (
+        f"{stats_base}?username={GITHUB_USERNAME}&show_icons=true&theme=radical&hide_border=true"
+    )
+    langs_url = (
+        f"{stats_base}/top-langs/?username={GITHUB_USERNAME}"
+        "&layout=compact&theme=radical&hide_border=true"
+    )
+    streak_base = "https://github-readme-streak-stats.herokuapp.com"
+    streak_url = f"{streak_base}?user={GITHUB_USERNAME}&theme=radical&hide_border=true"
 
     readme = f"""## Hi there 👋 I'm Ian (also named as o6md, bk5x)
 
 <img src="https://count.getloli.com/get/@{GITHUB_USERNAME}?theme=rule34" alt="Profile Views" />
 
 ### 📊 Stats
-<img src="https://github-readme-stats.vercel.app/api?username={GITHUB_USERNAME}&show_icons=true&theme=radical&hide_border=true" alt="GitHub Stats" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username={GITHUB_USERNAME}&layout=compact&theme=radical&hide_border=true" alt="Top Languages" />
-<img src="https://github-readme-streak-stats.herokuapp.com?user={GITHUB_USERNAME}&theme=radical&hide_border=true" alt="GitHub Streak" />
+<img src="{stats_url}" alt="GitHub Stats" />
+<img src="{langs_url}" alt="Top Languages" />
+<img src="{streak_url}" alt="GitHub Streak" />
 
 ---
 
@@ -225,7 +248,8 @@ def generate_readme(data: Dict[str, Any]) -> str:
 ✨ Last updated: {updated_time}
 
 <!--
-**{GITHUB_USERNAME}/{GITHUB_USERNAME}** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+**{GITHUB_USERNAME}/{GITHUB_USERNAME}** is a ✨ _special_ ✨ repository because its
+`README.md` (this file) appears on your GitHub profile.
 
 Here are some ideas to get you started:
 
@@ -242,15 +266,15 @@ Here are some ideas to get you started:
     return readme
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print("Fetching GitHub data...")
     data = fetch_github_data()
 
     print("Generating README...")
     readme_content: str = generate_readme(data)
 
-    readme_path: Path = Path('README.md')
-    readme_path.write_text(readme_content, encoding='utf-8')
+    readme_path: Path = Path("README.md")
+    readme_path.write_text(readme_content, encoding="utf-8")
 
     print("README updated successfully!")
     print(f"Updated {len(data['repos'])} repositories")

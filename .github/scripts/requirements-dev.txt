@@ -1,6 +1,13 @@
-# Add pytest as a dev dependency for running tests
-# This file is optional since update_readme.py only uses stdlib
-# but useful if you want to run the test suite
+# Development dependencies for Ian-bug profile updater
 
-# pytest==8.0.0
-# pytest-cov==4.0.0
+# Testing framework
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Code quality
+flake8>=6.1.0
+black>=23.7.0
+mypy>=1.5.0
+
+# Type stubs
+types-urllib3
