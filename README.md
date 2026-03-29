@@ -17,9 +17,9 @@
 
 - [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-03-29
 - [Ian-bug/RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - last activity: 2026-03-25
-- [Ian-bug/RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - last activity: 2026-03-25
-- [Ian-bug/RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - last activity: 2026-03-25
-- [Ian-bug/RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - last activity: 2026-03-25
+- [Ian-bug/ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - last activity: 2026-03-25
+- [Ian-bug/ruin-injector](https://github.com/Ian-bug/ruin-injector) - last activity: 2026-03-25
+- [FujiwaraChoki/MoneyPrinterV2](https://github.com/FujiwaraChoki/MoneyPrinterV2) - last activity: 2026-03-23
 
 
 ### 🚀 Pinned Repositories
@@ -46,7 +46,7 @@
 - 🤝 Following: 4
 
 ---
-✨ Last updated: 2026-03-29 11:52:22 UTC
+✨ Last updated: 2026-03-29 12:07:56 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
