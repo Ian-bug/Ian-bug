@@ -15,12 +15,9 @@ MAX_ACTIVITY_ITEMS = 5
 USER_AGENT = "Ian-bug-profile-updater"
 
 
-def run_command(cmd: str) -> str:
+def run_command(cmd: List[str]) -> str:
     """Run a command and return output with proper encoding"""
-    env = os.environ.copy()
-    result = subprocess.run(
-        cmd, shell=True, capture_output=True, text=True, encoding="utf-8", errors="ignore", env=env
-    )
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="ignore")
     return result.stdout
 
 
@@ -49,7 +46,7 @@ def fetch_pinned_repos() -> List[Dict[str, Any]]:
     }"""
 
     # Make GraphQL request
-    url = "https://api.github.com/graphql"
+    url = GITHUB_API_URL
     data = json.dumps({"query": query, "variables": {"login": GITHUB_USERNAME}}).encode("utf-8")
 
     req = urllib.request.Request(
@@ -82,9 +79,12 @@ def fetch_github_data() -> Dict[str, Any]:
     print(f"[DEBUG] Starting to fetch GitHub data for {GITHUB_USERNAME}...")
 
     # 1. Fetch User Stats
-    user_stats_cmd = 'gh api user --jq "{login, public_repos, followers, following}"'
     try:
-        user_stats = json.loads(run_command(user_stats_cmd))
+        user_stats = json.loads(
+            run_command(
+                ["gh", "api", "user", "--jq", "{login, public_repos, followers, following}"]
+            )
+        )
     except (json.JSONDecodeError, KeyError, ValueError) as e:
         print(f"Warning: Failed to fetch user stats: {e}")
         user_stats = {"login": GITHUB_USERNAME, "public_repos": 0, "followers": 0, "following": 0}
@@ -97,12 +97,23 @@ def fetch_github_data() -> Dict[str, Any]:
         print(f"[OK] Fetched {len(repos)} pinned repositories")
 
     # 3. Fetch Recent Activity
-    jq_template = ".[:{limit}] | map({{name: .repo.name, url: .repo.url, created_at: .created_at}})"
-    jq_filter = jq_template.format(limit=MAX_ACTIVITY_ITEMS)
-    activity_cmd = f'gh api users/{GITHUB_USERNAME}/events/public --jq "{jq_filter}"'
+    jq_filter = (
+        f".[:{MAX_ACTIVITY_ITEMS * 3}] | map({{name: .repo.name, url: .repo.url,"
+        f" created_at: .created_at}})"
+    )
     activity = []
     try:
-        activity = json.loads(run_command(activity_cmd))
+        activity = json.loads(
+            run_command(
+                [
+                    "gh",
+                    "api",
+                    f"users/{GITHUB_USERNAME}/events/public",
+                    "--jq",
+                    jq_filter,
+                ]
+            )
+        )
     except (json.JSONDecodeError, KeyError, ValueError) as e:
         print(f"Warning: Failed to parse activity: {e}")
 
@@ -134,25 +145,16 @@ def format_date(date_string: str) -> str:
 
 def generate_repos_section(repos: Any) -> str:
     """Generate repositories section markdown"""
-    # Type checking and handling
-    if not repos:
-        return "No repositories found."
-
-    if isinstance(repos, str):
-        print(f"Warning: repos is a string: {repos}")
-        return "No repositories found."
-
     if not isinstance(repos, list):
-        print(f"Warning: repos is not a list: {type(repos)}")
+        return "No repositories found."
+
+    if not repos:
         return "No repositories found."
 
     markdown = ""
     for repo in repos:
-        # Add defensive type checking for each repo
         if not isinstance(repo, dict):
-            print(f"Warning: Skipping non-dict repo item: {type(repo)}")
             continue
-
         name: str = repo.get("name", "Unknown")
         url: str = normalize_url(repo.get("url", "#"))
         desc: str = repo.get("description") or "No description"
@@ -172,11 +174,25 @@ def generate_activity_section(activity: List[Dict[str, Any]]) -> str:
     if not activity:
         return "No recent activity."
 
+    # Deduplicate by repo name, keeping the most recent entry per repo
+    seen: Dict[str, Dict[str, Any]] = {}
+    for item in activity:
+        repo_name = item.get("name", "")
+        if repo_name and (
+            repo_name not in seen
+            or item.get("created_at", "") > seen[repo_name].get("created_at", "")
+        ):
+            seen[repo_name] = item
+
+    # Sort by created_at in descending order (most recent first), take top N
+    unique_activity = sorted(
+        list(seen.values())[:MAX_ACTIVITY_ITEMS],
+        key=lambda x: x.get("created_at", ""),
+        reverse=True,
+    )
+
     markdown = ""
-    # Sort by created_at in descending order (most recent first)
-    for item in sorted(
-        activity[:MAX_ACTIVITY_ITEMS], key=lambda x: x.get("created_at", ""), reverse=True
-    ):
+    for item in unique_activity:
         name: str = item.get("name", "Unknown")
         url: str = normalize_url(item.get("url", "#"))
         created_at: str = item.get("created_at", "")
