@@ -15,16 +15,17 @@
 
 ### 🔥 Recent Activity
 
-- [Ian-bug/au-cli](https://github.com/Ian-bug/au-cli) - last activity: 2026-03-30
-- [cfpy67/au-cli](https://github.com/cfpy67/au-cli) - last activity: 2026-03-30
+- [Ian-bug/ruin-injector](https://github.com/Ian-bug/ruin-injector) - last activity: 2026-03-31
+- [cfpy67/au-cli](https://github.com/cfpy67/au-cli) - last activity: 2026-03-31
 - [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-03-29
 - [Ian-bug/RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - last activity: 2026-03-25
+- [Ian-bug/ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - last activity: 2026-03-25
 
 
 ### 🚀 Pinned Repositories
 
 - [ruin-injector](https://github.com/Ian-bug/ruin-injector) - A modern DLL injector built with Rust and egui, supporting both regular and UWP processes
-  - ⭐ 0 stars | 🍴 0 forks | 🔷 Rust
+  - ⭐ 1 stars | 🍴 0 forks | 🔷 Rust
 - [RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - Standalone "Rain" style input visualizer for rhythm games. External, safe, and transparent.
   - ⭐ 1 stars | 🍴 0 forks | 🔷 Python
 - [WhatIsBroDoing](https://github.com/Ian-bug/WhatIsBroDoing) - A Discord Rich Presence tool — displays your currently active program on Discord with customizable text and app name mapping
@@ -45,7 +46,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-03-31 07:40:14 UTC
+✨ Last updated: 2026-03-31 13:52:43 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
