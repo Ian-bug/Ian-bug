@@ -15,11 +15,11 @@
 
 ### 🔥 Recent Activity
 
+- [notdog1998/yourself-skill](https://github.com/notdog1998/yourself-skill) - last activity: 2026-04-06
 - [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) - last activity: 2026-04-06
 - [Ian-bug/au-cli](https://github.com/Ian-bug/au-cli) - last activity: 2026-04-05
 - [danielmiessler/Fabric](https://github.com/danielmiessler/Fabric) - last activity: 2026-04-05
 - [efekrbas/guns.lol-username-checker](https://github.com/efekrbas/guns.lol-username-checker) - last activity: 2026-04-05
-- [whale9820/au-cli](https://github.com/whale9820/au-cli) - last activity: 2026-04-04
 
 
 ### 🚀 Pinned Repositories
@@ -46,7 +46,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-04-06 13:27:21 UTC
+✨ Last updated: 2026-04-06 19:12:21 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
