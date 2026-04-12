@@ -15,17 +15,17 @@
 
 ### 🔥 Recent Activity
 
-- [Ian-bug/6-7-meme-skill](https://github.com/Ian-bug/6-7-meme-skill) - last activity: 2026-04-12
+- [Ian-bug/ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - last activity: 2026-04-12
+- [Ian-bug/6-7-skill](https://github.com/Ian-bug/6-7-skill) - last activity: 2026-04-12
 - [Ian-bug/anything-encryption-algorithm](https://github.com/Ian-bug/anything-encryption-algorithm) - last activity: 2026-04-12
 - [notdog1998/yourself-skill](https://github.com/notdog1998/yourself-skill) - last activity: 2026-04-06
 - [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) - last activity: 2026-04-06
-- [Ian-bug/au-cli](https://github.com/Ian-bug/au-cli) - last activity: 2026-04-05
 
 
 ### 🚀 Pinned Repositories
 
 - [ruin-injector](https://github.com/Ian-bug/ruin-injector) - A modern DLL injector built with Rust and egui, supporting both regular and UWP processes
-  - ⭐ 1 stars | 🍴 0 forks | 🔷 Rust
+  - ⭐ 2 stars | 🍴 0 forks | 🔷 Rust
 - [RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - Standalone "Rain" style input visualizer for rhythm games. External, safe, and transparent.
   - ⭐ 1 stars | 🍴 0 forks | 🔷 Python
 - [WhatIsBroDoing](https://github.com/Ian-bug/WhatIsBroDoing) - A Discord Rich Presence tool — displays your currently active program on Discord with customizable text and app name mapping
@@ -46,7 +46,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-04-12 13:18:17 UTC
+✨ Last updated: 2026-04-12 19:01:39 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
