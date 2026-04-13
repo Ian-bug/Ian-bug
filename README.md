@@ -15,11 +15,11 @@
 
 ### 🔥 Recent Activity
 
-- [Ian-bug/ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - last activity: 2026-04-12
+- [Ian-bug/ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - last activity: 2026-04-13
+- [Ian-bug/Ian-bug.github.io](https://github.com/Ian-bug/Ian-bug.github.io) - last activity: 2026-04-13
 - [Ian-bug/6-7-skill](https://github.com/Ian-bug/6-7-skill) - last activity: 2026-04-12
 - [Ian-bug/anything-encryption-algorithm](https://github.com/Ian-bug/anything-encryption-algorithm) - last activity: 2026-04-12
 - [notdog1998/yourself-skill](https://github.com/notdog1998/yourself-skill) - last activity: 2026-04-06
-- [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) - last activity: 2026-04-06
 
 
 ### 🚀 Pinned Repositories
@@ -46,7 +46,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-04-13 08:16:53 UTC
+✨ Last updated: 2026-04-13 14:00:11 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
