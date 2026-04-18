@@ -15,11 +15,11 @@
 
 ### 🔥 Recent Activity
 
+- [Ian-bug/ScreenshotStretchTo16by9](https://github.com/Ian-bug/ScreenshotStretchTo16by9) - last activity: 2026-04-18
 - [android/skills](https://github.com/android/skills) - last activity: 2026-04-16
 - [LmeSzinc/StarRailCopilot](https://github.com/LmeSzinc/StarRailCopilot) - last activity: 2026-04-14
 - [Ian-bug/ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - last activity: 2026-04-13
 - [Ian-bug/Ian-bug.github.io](https://github.com/Ian-bug/Ian-bug.github.io) - last activity: 2026-04-13
-- [Ian-bug/6-7-skill](https://github.com/Ian-bug/6-7-skill) - last activity: 2026-04-12
 
 
 ### 🚀 Pinned Repositories
@@ -32,6 +32,10 @@
   - ⭐ 0 stars | 🍴 1 forks | 🔷 Python
 - [ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - Modern landing website for Ruin DLL Injector - A lightweight Windows DLL injection tool built with Rust and egui
   - ⭐ 0 stars | 🍴 0 forks | 🔷 TypeScript
+- [6-7-skill](https://github.com/Ian-bug/6-7-skill) - agent skill that reacts when 67 is mentioned. 
+  - ⭐ 2 stars | 🍴 0 forks | 🔷 Unknown
+- [ScreenshotStretchTo16by9](https://github.com/Ian-bug/ScreenshotStretchTo16by9) - Lightweight Windows system-tray app that auto-stretches clipboard screenshots to 16:9 aspect ratio. Take a screenshot, paste — it's already 16:9.
+  - ⭐ 0 stars | 🍴 0 forks | 🔷 Python
 
 
 ### 🤝 Connect with Me
@@ -41,12 +45,12 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y01WG0DL)
 
 ### 📈 GitHub Overview
-- 📦 Total Repositories: 11
+- 📦 Total Repositories: 12
 - 👥 Followers: 4
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-04-18 13:18:55 UTC
+✨ Last updated: 2026-04-18 19:02:55 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
