@@ -15,11 +15,11 @@
 
 ### 🔥 Recent Activity
 
+- [opensoft/oh-my-opencode](https://github.com/opensoft/oh-my-opencode) - last activity: 2026-04-21
 - [Ian-bug/ScreenshotStretchTo16by9](https://github.com/Ian-bug/ScreenshotStretchTo16by9) - last activity: 2026-04-18
 - [android/skills](https://github.com/android/skills) - last activity: 2026-04-16
 - [LmeSzinc/StarRailCopilot](https://github.com/LmeSzinc/StarRailCopilot) - last activity: 2026-04-14
 - [Ian-bug/ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - last activity: 2026-04-13
-- [Ian-bug/Ian-bug.github.io](https://github.com/Ian-bug/Ian-bug.github.io) - last activity: 2026-04-13
 
 
 ### 🚀 Pinned Repositories
@@ -50,7 +50,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-04-21 14:01:43 UTC
+✨ Last updated: 2026-04-21 19:23:02 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
