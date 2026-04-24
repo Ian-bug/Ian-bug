@@ -15,11 +15,10 @@
 
 ### 🔥 Recent Activity
 
+- [Ian-bug/website-template-creator](https://github.com/Ian-bug/website-template-creator) - last activity: 2026-04-24
 - [opensoft/oh-my-opencode](https://github.com/opensoft/oh-my-opencode) - last activity: 2026-04-21
 - [Ian-bug/ScreenshotStretchTo16by9](https://github.com/Ian-bug/ScreenshotStretchTo16by9) - last activity: 2026-04-18
 - [android/skills](https://github.com/android/skills) - last activity: 2026-04-16
-- [LmeSzinc/StarRailCopilot](https://github.com/LmeSzinc/StarRailCopilot) - last activity: 2026-04-14
-- [Ian-bug/ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - last activity: 2026-04-13
 
 
 ### 🚀 Pinned Repositories
@@ -45,12 +44,12 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y01WG0DL)
 
 ### 📈 GitHub Overview
-- 📦 Total Repositories: 12
+- 📦 Total Repositories: 13
 - 👥 Followers: 4
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-04-24 13:57:14 UTC
+✨ Last updated: 2026-04-24 19:05:03 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
