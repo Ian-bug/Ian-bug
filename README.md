@@ -15,11 +15,11 @@
 
 ### 🔥 Recent Activity
 
+- [thedogecraft/sparkle](https://github.com/thedogecraft/sparkle) - last activity: 2026-05-03
 - [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) - last activity: 2026-05-02
 - [Ian-bug/ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - last activity: 2026-05-02
 - [nexu-io/open-design](https://github.com/nexu-io/open-design) - last activity: 2026-05-01
 - [Aspectise/Username-Finder](https://github.com/Aspectise/Username-Finder) - last activity: 2026-04-28
-- [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) - last activity: 2026-04-25
 
 
 ### 🚀 Pinned Repositories
@@ -50,7 +50,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-05-03 03:59:34 UTC
+✨ Last updated: 2026-05-03 08:09:22 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
