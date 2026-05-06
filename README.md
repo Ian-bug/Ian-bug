@@ -15,11 +15,11 @@
 
 ### 🔥 Recent Activity
 
-- [thedogecraft/sparkle](https://github.com/thedogecraft/sparkle) - last activity: 2026-05-03
-- [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) - last activity: 2026-05-02
-- [Ian-bug/ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - last activity: 2026-05-02
-- [nexu-io/open-design](https://github.com/nexu-io/open-design) - last activity: 2026-05-01
-- [Aspectise/Username-Finder](https://github.com/Aspectise/Username-Finder) - last activity: 2026-04-28
+- [Ian-bug/ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - last activity: 2026-05-06
+- [Ian-bug/ruin-injector](https://github.com/Ian-bug/ruin-injector) - last activity: 2026-05-06
+- [sparanoid/chinese-copywriting-guidelines](https://github.com/sparanoid/chinese-copywriting-guidelines) - last activity: 2026-05-06
+- [Ian-bug/Ian-bug.github.io](https://github.com/Ian-bug/Ian-bug.github.io) - last activity: 2026-05-06
+- [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) - last activity: 2026-05-06
 
 
 ### 🚀 Pinned Repositories
@@ -50,7 +50,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-05-06 03:53:28 UTC
+✨ Last updated: 2026-05-06 14:33:47 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
