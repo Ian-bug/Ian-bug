@@ -15,11 +15,9 @@
 
 ### 🔥 Recent Activity
 
-- [jnoc/telegram-username-checker](https://github.com/jnoc/telegram-username-checker) - last activity: 2026-05-20
 - [Ian-bug/ruin-injector-website](https://github.com/Ian-bug/ruin-injector-website) - last activity: 2026-05-06
-- [Ian-bug/ruin-injector](https://github.com/Ian-bug/ruin-injector) - last activity: 2026-05-06
-- [sparanoid/chinese-copywriting-guidelines](https://github.com/sparanoid/chinese-copywriting-guidelines) - last activity: 2026-05-06
 - [Ian-bug/Ian-bug.github.io](https://github.com/Ian-bug/Ian-bug.github.io) - last activity: 2026-05-06
+- [Ian-bug/website-template-creator](https://github.com/Ian-bug/website-template-creator) - last activity: 2026-04-24
 
 
 ### 🚀 Pinned Repositories
@@ -50,7 +48,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-05-20 20:26:47 UTC
+✨ Last updated: 2026-05-21 04:25:14 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
