@@ -253,8 +253,6 @@ def generate_readme(data: Dict[str, Any]) -> str:
 
 - 💼 GitHub: [{GITHUB_USERNAME}](https://github.com/{GITHUB_USERNAME})
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y01WG0DL)
-
 ### 📈 GitHub Overview
 - 📦 Total Repositories: {data['stats'].get('public_repos', 0)}
 - 👥 Followers: {data['stats'].get('followers', 0)}
