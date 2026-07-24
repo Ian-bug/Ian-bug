@@ -39,15 +39,13 @@
 
 - 💼 GitHub: [Ian-bug](https://github.com/Ian-bug)
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y01WG0DL)
-
 ### 📈 GitHub Overview
 - 📦 Total Repositories: 13
 - 👥 Followers: 4
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-07-24 17:20:56 UTC
+✨ Last updated: 2026-07-24 17:24:43 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
