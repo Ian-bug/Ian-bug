@@ -15,11 +15,11 @@
 
 ### 🔥 Recent Activity
 
+- [Ian-bug/ruin-injector](https://github.com/Ian-bug/ruin-injector) - last activity: 2026-08-07
+- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-08-07
 - [Ian-bug/Ian-bug.github.io](https://github.com/Ian-bug/Ian-bug.github.io) - last activity: 2026-08-06
 - [whynot-tw/whynot-tw.github.io](https://github.com/whynot-tw/whynot-tw.github.io) - last activity: 2026-08-02
 - [zenbu-labs/terminal-browser](https://github.com/zenbu-labs/terminal-browser) - last activity: 2026-08-01
-- [Ian-bug/RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - last activity: 2026-07-24
-- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-07-24
 
 
 ### 🚀 Pinned Repositories
@@ -48,7 +48,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-08-07 09:20:45 UTC
+✨ Last updated: 2026-08-07 09:24:49 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
