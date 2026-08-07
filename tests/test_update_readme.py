@@ -1,16 +1,14 @@
 """Unit tests for update_readme.py"""
 
 import json
-from unittest.mock import patch, MagicMock
-import pytest
-from datetime import datetime, timezone
+from unittest.mock import patch
 import sys
 from pathlib import Path
 
 # Add scripts directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent / ".github" / "scripts"))
 
-from update_readme import (
+from update_readme import (  # noqa: E402
     fetch_github_data,
     generate_repos_section,
     generate_activity_section,
@@ -156,6 +154,7 @@ class TestGenerateReadme:
         assert "Followers: 5" in result
         assert "Following: 3" in result
         assert "Last updated:" in result
+        assert "https://github-stats-extended.vercel.app/api" in result
 
     def test_with_repos_and_activity(self):
         """Test README with repos and activity"""

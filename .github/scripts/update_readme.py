@@ -215,7 +215,7 @@ def generate_readme(data: Dict[str, Any]) -> str:
     activity_section: str = generate_activity_section(data.get("activity", []))
     updated_time: str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
 
-    stats_base = "https://github-readme-stats.vercel.app/api"
+    stats_base = "https://github-stats-extended.vercel.app/api"
     stats_url = (
         f"{stats_base}?username={GITHUB_USERNAME}&show_icons=true&theme=radical&hide_border=true"
     )

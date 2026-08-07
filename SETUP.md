@@ -10,7 +10,7 @@ This repository automatically updates your GitHub profile README with dynamic da
 - ⭐ **Repository Details**: Shows description, stars, forks, and primary language
 - 🔥 **Recent Activity**: Displays recent commit activity across your repositories
 - 📈 **Profile Views**: Includes a visitor counter
-- 🎨 **Beautiful Stats Cards**: Uses GitHub Readme Stats for visual statistics
+- 🎨 **Beautiful Stats Cards**: Uses GitHub Stats Extended for visual statistics
 
 ## 🛠️ Setup
 
@@ -134,7 +134,7 @@ Edit the `generate_readme()` function in `.github/scripts/update_readme.py` to m
    - Profile statistics
    - Top repositories with details
    - Recent activity
-   - Visual stats cards from GitHub Readme Stats
+   - Visual stats cards from GitHub Stats Extended
 4. **Commit & Push**: Automatically pulls latest changes, commits, and pushes updates
 
 ## 📊 Included Metrics
@@ -159,7 +159,7 @@ Edit the `generate_readme()` function in `.github/scripts/update_readme.py` to m
 
 ## 🎨 External Services Used
 
-- **GitHub Readme Stats**: For beautiful stats cards
+- **GitHub Stats Extended**: For beautiful stats cards
 - **Visitor Counter**: For profile view tracking
 - **GitHub API**: For fetching repository and user data
 
@@ -174,7 +174,7 @@ This project is open source and available under the MIT License.
 ## 🙏 Credits
 
 - Inspired by various GitHub profile auto-update solutions
-- GitHub Readme Stats for the awesome stats cards
+- GitHub Stats Extended for the awesome stats cards
 - GitHub Actions for automation
 
 ---

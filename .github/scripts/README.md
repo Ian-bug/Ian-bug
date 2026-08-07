@@ -3,8 +3,8 @@
 <img src="https://count.getloli.com/get/@Ian-bug?theme=rule34" alt="Profile Views" />
 
 ### 📊 Stats
-<img src="https://github-readme-stats.vercel.app/api?username=Ian-bug&show_icons=true&theme=radical&hide_border=true" alt="GitHub Stats" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Ian-bug&layout=compact&theme=radical&hide_border=true" alt="Top Languages" />
+<img src="https://github-stats-extended.vercel.app/api?username=Ian-bug&show_icons=true&theme=radical&hide_border=true" alt="GitHub Stats" />
+<img src="https://github-stats-extended.vercel.app/api/top-langs/?username=Ian-bug&layout=compact&theme=radical&hide_border=true" alt="Top Languages" />
 <img src="https://github-readme-streak-stats.herokuapp.com?user=Ian-bug&theme=radical&hide_border=true" alt="GitHub Streak" />
 
 ---
