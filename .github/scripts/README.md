@@ -1,4 +1,4 @@
-## Hi there 👋 I'm Ian (also named as o6md, bk5x)
+## Hi there 👋 I'm Ian (you also can call me md)
 
 <img src="https://count.getloli.com/get/@Ian-bug?theme=rule34" alt="Profile Views" />
 

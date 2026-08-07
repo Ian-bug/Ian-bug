@@ -226,7 +226,7 @@ def generate_readme(data: Dict[str, Any]) -> str:
     streak_base = "https://github-readme-streak-stats.herokuapp.com"
     streak_url = f"{streak_base}?user={GITHUB_USERNAME}&theme=radical&hide_border=true"
 
-    readme = f"""## Hi there 👋 I'm Ian (also named as o6md, bk5x)
+    readme = f"""## Hi there 👋 I'm Ian (you also can call me md)
 
 <img src="https://count.getloli.com/get/@{GITHUB_USERNAME}?theme=rule34" alt="Profile Views" />
 
