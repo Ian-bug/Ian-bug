@@ -15,9 +15,7 @@
 
 ### 🔥 Recent Activity
 
-- [Ian-bug/Ian-bug](https://github.com/Ian-bug/Ian-bug) - last activity: 2026-08-07
-- [Ian-bug/ruin-injector](https://github.com/Ian-bug/ruin-injector) - last activity: 2026-08-07
-
+No recent activity.
 
 ### 🚀 Pinned Repositories
 
@@ -45,7 +43,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-09-06 15:20:42 UTC
+✨ Last updated: 2026-09-06 20:17:42 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
