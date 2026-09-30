@@ -22,7 +22,7 @@
 ### 🚀 Pinned Repositories
 
 - [ruin-injector](https://github.com/Ian-bug/ruin-injector) - A modern DLL injector built with Rust and egui, supporting both regular and UWP processes
-  - ⭐ 3 stars | 🍴 0 forks | 🔷 Rust
+  - ⭐ 4 stars | 🍴 0 forks | 🔷 Rust
 - [RainingKeysPython](https://github.com/Ian-bug/RainingKeysPython) - Standalone "Rain" style input visualizer for rhythm games. External, safe, and transparent.
   - ⭐ 1 stars | 🍴 1 forks | 🔷 Python
 - [WhatIsBroDoing](https://github.com/Ian-bug/WhatIsBroDoing) - A Discord Rich Presence tool — displays your currently active program on Discord with customizable text and app name mapping
@@ -45,7 +45,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-09-30 12:22:06 UTC
+✨ Last updated: 2026-09-30 22:07:53 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
