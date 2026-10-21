@@ -15,6 +15,7 @@
 
 ### 🔥 Recent Activity
 
+- [ovsky/hyperos-debloater](https://github.com/ovsky/hyperos-debloater) - last activity: 2026-10-21
 - [cloverscripts/riff-muriel](https://github.com/cloverscripts/riff-muriel) - last activity: 2026-10-16
 - [hamen/material-3-skill](https://github.com/hamen/material-3-skill) - last activity: 2026-09-29
 
@@ -45,7 +46,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-10-20 21:28:53 UTC
+✨ Last updated: 2026-10-21 04:23:44 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
