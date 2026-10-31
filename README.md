@@ -15,9 +15,11 @@
 
 ### 🔥 Recent Activity
 
+- [NationalSecurityAgency/ghidra](https://github.com/NationalSecurityAgency/ghidra) - last activity: 2026-10-31
+- [morluto/rea](https://github.com/morluto/rea) - last activity: 2026-10-31
+- [pbakaus/impeccable](https://github.com/pbakaus/impeccable) - last activity: 2026-10-31
 - [abhis699/realmeui-debloater](https://github.com/abhis699/realmeui-debloater) - last activity: 2026-10-22
 - [ovsky/hyperos-debloater](https://github.com/ovsky/hyperos-debloater) - last activity: 2026-10-21
-- [cloverscripts/riff-muriel](https://github.com/cloverscripts/riff-muriel) - last activity: 2026-10-16
 
 
 ### 🚀 Pinned Repositories
@@ -46,7 +48,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-10-31 05:14:01 UTC
+✨ Last updated: 2026-10-31 12:05:35 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
