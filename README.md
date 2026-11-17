@@ -15,11 +15,11 @@
 
 ### 🔥 Recent Activity
 
+- [horizonwiki/fire](https://github.com/horizonwiki/fire) - last activity: 2026-11-17
+- [Itz-Agasta/metrocity](https://github.com/Itz-Agasta/metrocity) - last activity: 2026-11-17
+- [nyxxbit/discord-quest-completer](https://github.com/nyxxbit/discord-quest-completer) - last activity: 2026-11-17
 - [NationalSecurityAgency/ghidra](https://github.com/NationalSecurityAgency/ghidra) - last activity: 2026-10-31
 - [morluto/rea](https://github.com/morluto/rea) - last activity: 2026-10-31
-- [pbakaus/impeccable](https://github.com/pbakaus/impeccable) - last activity: 2026-10-31
-- [abhis699/realmeui-debloater](https://github.com/abhis699/realmeui-debloater) - last activity: 2026-10-22
-- [ovsky/hyperos-debloater](https://github.com/ovsky/hyperos-debloater) - last activity: 2026-10-21
 
 
 ### 🚀 Pinned Repositories
@@ -48,7 +48,7 @@
 - 🤝 Following: 5
 
 ---
-✨ Last updated: 2026-11-17 07:39:00 UTC
+✨ Last updated: 2026-11-17 20:44:13 UTC
 
 <!--
 **Ian-bug/Ian-bug** is a ✨ _special_ ✨ repository because its
